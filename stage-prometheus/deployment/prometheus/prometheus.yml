@@ -1,0 +1,39 @@
+global:
+  scrape_interval:     10s
+  evaluation_interval: 10s
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+        [
+          "alertmanager-011:9093",
+          "alertmanager-012:9093",
+ 
+        ]
+rule_files:
+  - "rules.yml"
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+    - targets: 
+        [
+          "prometheus-001:9090",
+          "prometheus-002:9090",
+        ]
+  - job_name: "node"
+    static_configs:
+    - targets:
+        [
+          "node-101:9100",
+        ]
+  - job_name: "alertmanager"
+    static_configs:
+    - targets: 
+        [
+          "alertmanager-011:9093",
+          "alertmanager-012:9093",
+        ]
+  - job_name: "grafana"
+    static_configs:
+    - targets: ["grafana:3000"]
